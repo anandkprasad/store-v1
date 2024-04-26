@@ -1,0 +1,128 @@
+<%- include('partials/header', {product: other}) %>
+
+<div class="container">
+    <br>
+    <br>
+    <!-- Breadcrumbs -->
+		<div class="breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="bread-inner">
+							<ul class="bread-list">
+								<li><a href="/">Home<i class="ti-arrow-right"></i></a></li>
+                                <li class="active"><a href="/products">Product</a><i class="ti-arrow-right"></i></li>
+                                <li><a href="/product/<%= products._id %>"><%= products.title %></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Breadcrumbs -->
+    <div class="row product-main">
+        <div class="col-md-6 col-sm-12">
+            <img src="<%= products.image %>" alt="" class="default-img img-fluid image-show">
+        </div>
+        <div class="col-md-6 col-sm-12 center product-body">
+            <h1 class="display-5 center"><%= products.title %></h1>
+            <br>
+            <p class="center"><%= products.desc %></p>
+            <br>
+            <a href="/product/cart/<%= products._id %>" class="btn">Add to cart</a>
+            <a href="#" class="btn">Buy now</a>
+        </div>
+    </div>
+    <div class="container related">
+        <br>
+        <h1 class="display-5 center">Related Items</h1>
+        <div class="pad-show">
+            <div class="row">
+                <% for(var i = 0; i < other.length; i++){ %>
+                    <% if(i == 4){ %>
+                        <% break; %>
+                    <% } %>
+                    <% if(other[i]._id.toString() != products._id.toString()){ %>
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <a href="/product/<%= other[i]._id %>">
+                                        <img class="default-img img-fluid image-product" src="<%= other[i].image %>" alt="#">
+                                    </a>
+                                    <div class="button-head">
+                                        <div class="product-action">
+                                            <a title="Quick View" href="/product/<%= other[i]._id %>"><i class=" ti-eye"></i><span>Check out</span></a>
+                                        </div>
+                                        <div class="product-action-2">
+                                            <a title="Add to cart" href="/product/cart/<%= other[i]._id %>">Add to cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <h3><a href="/product/<%= other[i]._id %>"><%= other[i].title %></a></h3>
+                                    <div class="product-price">
+                                        <span class="old">₹500</span>
+                                        <% if(other[i].price.search("₹") != -1){ %>
+                                            <span><%= other[i].price %></span>
+                                        <% } else { %>
+                                            <span>₹<%= other[i].price %></span>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } %>
+    </div>
+    </div>
+    <br>
+</div>
+<br>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1 class="center">Write a comment!</h1>
+            <br>
+            <div class="col-md-6 center"> 
+                    <form action="/comment/<%= products.id %>" method="POST">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Message</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <br>
+            </div> 
+        </div>
+        <div class="col-md-6">
+            <div class="show-comment">  
+                <h1 class="center">Your reviews</h1>
+                <br>
+                <% var count = 0; %>
+                <% for(var i = 0; i< comments.length; i++){ %>
+                    <% if(comments[i].product == products._id){ %>
+                        <div class="single-comment container-fluid">
+                            <p><strong><%= comments[i].user %></strong> said: <%= comments[i].message %></p>
+                        </div>
+                        <br>
+                        <% count++; %>
+                    <% } %>
+                <% } %>
+        
+                <% if(count == 0){ %>
+                    <div class="single-comment container-fluid">
+                        <p class="center"><strong>No comments found!</strong></p>
+                    </div>
+                    <br>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+</div>
+
+<%- include('partials/footer') %>

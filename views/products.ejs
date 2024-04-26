@@ -1,0 +1,133 @@
+<%- include('partials/header') %>
+
+<main>
+    <br>
+    <br>
+         <!-- Breadcrumbs -->
+         <div class="breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="bread-inner">
+                            <ul class="bread-list">
+                                <li><a href="/">Home<i class="ti-arrow-right"></i></a></li>
+                                <li class="active"><a href="/products">Products</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Breadcrumbs -->
+    	<!-- Product Style -->
+		<section class="product-area shop-sidebar shop section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-4 col-12">
+						<div class="shop-sidebar">
+								<!-- Single Widget -->
+								<div class="single-widget category">
+									<h3 class="title">Categories</h3>
+									<ul class="categor-list">
+										<li><a href="#">T-shirts</a></li>
+										<li><a href="#">jacket</a></li>
+										<li><a href="#">jeans</a></li>
+										<li><a href="#">sweatshirts</a></li>
+										<li><a href="#">trousers</a></li>
+										<li><a href="#">kitwears</a></li>
+										<li><a href="#">accessories</a></li>
+									</ul>
+								</div>
+								<!--/ End Single Widget -->
+								<!-- Single Widget -->
+								<div class="single-widget recent-post">
+                                    <h3 class="title">Recent post</h3>
+                                    <% for(var i = product.length - 1; i >= 0; i--){ %>
+                                        <% if(i == product.length - 3){ %>
+                                            <% break; %>
+                                        <% } %>
+                                        <!-- Single Post -->
+                                        <div class="single-post first">
+                                            <div class="image">
+                                                <img src="<%= product[i].image %>" alt="#">
+                                            </div>
+                                            <div class="content">
+                                                <h5><a href="/product/<%= product[i]._id %>"><%= product[i].title %></a></h5>
+                                                <% if(product[i].price.search("₹") != -1){ %>
+                                                    <p class="price"><%= product[i].price %></p>
+                                                <% } else { %>
+                                                    <p class="price">₹<%= product[i].price %></p>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Post -->
+                                    <% } %>
+								</div>
+								<!--/ End Single Widget -->
+						</div>
+					</div>
+					<div class="col-lg-9 col-md-8 col-12">
+						<div class="row">
+                            <% for(var i = 0; i < product.length; i++){ %>
+                                <!-- product starts -->
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="single-product">
+                                        <div class="product-img">
+                                            <a href="/product/<%= product[i]._id %>">
+                                                <img class="default-img img-fluid image-product" src="<%= product[i].image %>" alt="#">
+                                            </a>
+                                            <div class="button-head">
+                                                <div class="product-action">
+                                                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="/product/<%= product[i]._id %>"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                </div>
+                                                <div class="product-action-2">
+                                                    <a title="Add to cart" href="#">Add to cart</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <h3><a href="/product/<%= product[i]._id %>"><%= product[i].title %></a></h3>
+                                            <div class="product-price">
+                                                <% if(product[i].price.search("₹") != -1){ %>
+                                                    <span><%= product[i].price %></span>
+                                                <% } else { %>
+                                                    <span>₹<%= product[i].price %></span>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- product ends -->
+                            <% } %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ End Product Style 1  -->	
+
+		<!-- Start Shop Newsletter  -->
+		<section class="shop-newsletter section">
+			<div class="container">
+				<div class="inner-top">
+					<div class="row">
+						<div class="col-lg-8 offset-lg-2 col-12">
+							<!-- Start Newsletter Inner -->
+							<div class="inner">
+								<h4>Newsletter</h4>
+								<p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+								<form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+									<input name="EMAIL" placeholder="Your email address" required="" type="email">
+									<button class="btn">Subscribe</button>
+								</form>
+							</div>
+							<!-- End Newsletter Inner -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Shop Newsletter -->
+</main>
+
+<%- include('partials/footer') %>

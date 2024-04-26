@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+
+<main id="main">
+    <% var err = true; %>
+    <h3 class="center">Search results for <u style="color: red;"><%= input %></u> are:</h3>
+    <% var count = 0; %>
+            <div class="container">
+                <br>
+                <div class="row center row-tailor">
+                    <% for(var i=0; i< product.length; i++){ %>
+                        <% if(product[i].title.toLowerCase().search(input.toLowerCase()) != -1 || product[i].keyword.toLowerCase().search(input.toLowerCase()) != -1){ %>                 
+                            <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                                <div class="single-product">
+                                    <div class="product-img">
+                                        <a href="/product/<%= product[i]._id %>">
+                                            <img class="default-img img-fluid image-product" src="<%= product[i].image %>" alt="#">
+                                        </a>
+                                        <div class="button-head">
+                                            <div class="product-action">
+                                                <a title="Quick View" href="/product/<%= product[i]._id %>"><i class=" ti-eye"></i><span>Check out</span></a>
+                                            </div>
+                                            <div class="product-action-2">
+                                                <a title="Add to cart" href="/product/cart/<%= product[i]._id %>">Add to cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <h3><a href="/product/<%= product[i]._id %>"><%= product[i].title %></a></h3>
+                                        <div class="product-price">
+                                            <span class="old">₹500</span>
+                                            <% if(product[i].price.search("₹") != -1){ %>
+                                                <span><%= product[i].price %></span>
+                                            <% } else { %>
+                                                <span>₹<%= product[i].price %></span>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% count ++ %>
+                        <% }  %>
+                    <% } %>
+                </div>
+            </div>
+            <br>
+            <br>
+    <% if(count > 0){ %>
+        <p class="center result-count"><%= count %> results found</p>
+    <% } else { %>
+        <p class="center result-count">No resuts found!</p>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>

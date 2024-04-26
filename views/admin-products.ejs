@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+
+    <main id="main">
+        <h1 class="display-3 center title-admin">Admin Products</h1>
+        <div class="container">
+            <div class="container">
+                <% if(success && success.length > 0){ %>
+                    <div id="flash" class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                <% } %>
+                <% if(error && error.length > 0){ %>
+                    <div id="flash" class="alert alert-danger" role="alert">
+                        <div><%= error %></div>
+                    </div>
+                <% } %>
+            </div>
+            <div class="row">
+                    <% for(var i = 0; i < product.length; i++){ %>
+                        <div class="col-md-3 product-single">
+                            <img src="<%= product[i].image %>" alt="" class="img-fluid image-product">
+                            <br>
+                            <br>
+                            <h2 class="display-5 center"><%= product[i].title %></h2>
+                            <p class="center"><%= product[i].desc %></p>
+
+                            <% if(product[i].price.search("₹") != -1){ %>
+                                <h4 class="display-5 center"><%= product[i].price %></h4>
+                            <% } else { %>
+                                <h4 class="display-5 center">₹<%= product[i].price %></h4>
+                            <% } %>
+                            <br>
+                            <div class="center"><a href="/admin/remove/<%= product[i]._id %>" class="btn center">Remove</a></div>
+                            <br>
+                        </div>
+                    <% } %>
+            </div>
+        </div>   
+    </main><!-- End #main -->
+    
+<%- include('partials/footer') %>

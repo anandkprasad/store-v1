@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<!-- Meta Tag -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name='copyright' content=''>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Title Tag  -->
+  <title>YoClothWala - eCommerce HTML5 Template.</title>
+	<!-- Favicon -->
+	<link rel="icon" type="/image/png" href="/images/favicon.png">
+	<!-- Web Font -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+	<!-- StyleSheet -->
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="/css/bootstrap.css">
+	<!-- Magnific Popup -->
+  <link rel="stylesheet" href="/css/magnific-popup.min.css">
+	<!-- Font Awesome -->
+  <link rel="stylesheet" href="/css/font-awesome.css">
+	<!-- Fancybox -->
+	<link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+	<!-- Themify Icons -->
+  <link rel="stylesheet" href="/css/themify-icons.css">
+	<!-- Nice Select CSS -->
+  <link rel="stylesheet" href="/css/niceselect.css">
+	<!-- Animate CSS -->
+  <link rel="stylesheet" href="/css/animate.css">
+	<!-- Flex Slider CSS -->
+  <link rel="stylesheet" href="/css/flex-slider.min.css">
+	<!-- Owl Carousel -->
+  <link rel="stylesheet" href="/css/owl-carousel.css">
+	<!-- Slicknav -->
+  <link rel="stylesheet" href="/css/slicknav.min.css">
+
+	<!-- YoClothWala StyleSheet -->
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body class="js">
+
+	<!-- Preloader -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+	<!-- End Preloader -->
+
+
+	<!-- Header -->
+	<header class="header shop">
+		<div class="middle-inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-12">
+						<!-- Logo -->
+						<div class="logo">
+							<a href="/"><img src="/images/logo.png" alt="logo"></a>
+						</div>
+						<!--/ End Logo -->
+						<!-- Search Form -->
+						<div class="search-top">
+							<div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+							<!-- Search Form -->
+							<div class="search-top">
+								<form class="search-form" action="/search" method="POST">
+									<input type="text" placeholder="Search here..." name="input">
+									<button value="search" type="submit"><i class="ti-search"></i></button>
+								</form>
+							</div>
+							<!--/ End Search Form -->
+						</div>
+						<!--/ End Search Form -->
+						<div class="mobile-nav"></div>
+					</div>
+					<div class="col-lg-8 col-md-7 col-12">
+						<div class="search-bar-top">
+							<div class="search-bar">
+								<form action="/search" method="POST">
+									<input name="input" placeholder="Search Products Here....." type="search">
+									<button class="btnn"><i class="ti-search"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-3 col-12">
+						<% if(currentUser){ %>
+							<div class="right-bar">
+								<!-- Search Form -->
+								<div class="sinlge-bar">
+									<a href="/products" class="single-icon"><i class="ti-layout"></i></a>
+								</div>
+								<div class="sinlge-bar shopping">
+									<a href="/cart" class="single-icon"><i class="ti-bag"></i> <span class="total-count"><%= currentUser.cart.length %></span></a>
+									<!-- Shopping Item -->
+									<div class="shopping-item">
+										<div class="dropdown-cart-header">
+											<span><%= currentUser.cart.length %> Items</span>
+											<a href="/cart">View Cart</a>
+										</div>
+										<ul class="shopping-list">	
+											<% for(var j = 0; j < currentUser.cart.length; j++){ %>
+												<% for(var i = 0; i < product.length; i++){ %>
+													<% if(product[i]._id == currentUser.cart[j]){ %>
+														<li>
+															<a href="/cart/remove/<%= product[i]._id %>" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+															<a class="cart-img" href="/product/<%= product[i]._id %>"><img src="<%= product[i].image %>" alt="#"></a>
+															<h4><a href="/product/<%= product[i]._id %>"><%= product[i].title %></a></h4>
+															<% if(product[i].price.search("₹") != -1){ %>
+																<p class="quantity">1x - <span class="amount"><%= product[i].price %></span></p>
+															<% } else { %>
+																<p class="quantity">1x - <span class="amount">₹<%= product[i].price %></span></p>
+															<% } %>
+														</li>
+													<% } %>
+												<% } %>
+											<% } %>
+										</ul>
+										<div class="bottom">	
+											<a href="checkout.html" class="btn animate">Checkout</a>
+										</div>
+									</div>
+									<!--/ End Shopping Item -->
+						<% } %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Header Inner -->
+		<div class="header-inner">
+			<div class="container">
+				<div class="cat-nav-head">
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="all-category">
+								<h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>CATEGORIES</h3>
+								<ul class="main-category">
+									<li><a href="#">Casual T-shirt Collection</a></li>
+									<li><a href="#">Gym Collection</a></li>
+									<li><a href="#">Shirt Collection</a></li>
+									<li><a href="#">Summer Collection</a></li>
+									<li><a href="#">Flash sale</a></li>
+									<li><a href="#">New Products</a></li>
+									<li><a href="#">Best selling</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-9 col-12">
+							<div class="menu-area">
+								<!-- Main Menu -->
+								<nav class="navbar navbar-expand-lg">
+									<div class="navbar-collapse">
+										<div class="nav-inner">
+											<ul class="nav main-menu menu navbar-nav">
+													<li class="active"><a href="/">Home</a></li>
+													<li><a href="/products">Shop</a>
+													</li>
+													<li><a href="/contact">Contact Us</a></li>
+													<% if(currentUser){ %>
+														<% if(currentUser.type == 0) { %>
+															<li><a href="/admin">Signed in as <%= currentUser.username %></a></li>
+														<% } else { %>
+															<li><a href="/">Signed in as <%= currentUser.username %></a></li>
+														<% } %>
+														<li><a href="/logout">Logout</a></li>
+													<% } else { %>
+														<li><a href="/login">Login</a></li>
+													<% } %>
+												</ul>
+										</div>
+									</div>
+								</nav>
+								<!--/ End Main Menu -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Header Inner -->
+	</header>
+	<!--/ End Header -->
+
+	<!-- Slider Area -->
+	<section class="hero-slider">
+		<!-- Single Slider -->
+		<div class="single-slider">
+			<div class="container">
+				<div class="row no-gutters">
+					<div class="col-lg-9 offset-lg-3 col-12">
+						<div class="text-inner">
+							<div class="row">
+								<div class="col-lg-7 col-12">
+									<div class="hero-text">
+										<h1 class="top-text" style="color: white;"><span style="color: #F7941D;">ALL NEW</span>Summer Time Collection</h1>
+										<p class="top-text" style="color: white;">Checkout Casual Tshirts, Gym Tees <br>  and High Quality Shirts NOW <br> and get upto 50% off.</p>
+										<div class="button">
+											<a href="#" class="btn">Shop Now!</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Single Slider -->
+	</section>
+	<!--/ End Slider Area -->
+
+	<!-- Start Small Banner  -->
+	<section class="small-banner section">
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="single-banner">
+						<img src="https://images.unsplash.com/photo-1610222033421-858e7907b542?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Banner Image" class="img-fluid banner">
+						<div class="content">
+							<p class="top-text">Men Collection</p>
+							<h3 class="banner-text top-text">Casual <br> collection</h3>
+							<a href="#" class="banner-text top-text">Discover Now</a>
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-md-6 col-12">
+					<div class="single-banner">
+						<img src="https://images.unsplash.com/photo-1503431194692-82dd03d18093?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1490&q=80"alt="Banner Image" class="img-fluid banner">
+						<div class="content">
+							<p class="top-text">Gym Collection</p>
+							<h3 class="banner-text top-text">Workout Needs <br> 2021</h3>
+							<a class="banner-text top-text" href="#">Shop Now</a>
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+				<!-- Single Banner  -->
+				<div class="col-lg-4 col-12">
+					<div class="single-banner tab-height">
+						<img src="https://images.unsplash.com/photo-1516031114-4e1ca7af6238?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Banner Image" class="img-fluid banner">
+						<div class="content">
+							<p class="top-text">Flash Sale</p>
+							<h3 class="banner-text top-text">Mid Season <br> Up to <span>50%</span> Off</h3>
+							<a class="banner-text top-text" href="#">Discover Now</a>
+						</div>
+					</div>
+				</div>
+				<!-- /End Single Banner  -->
+			</div>
+		</div>
+	</section>
+	<!-- End Small Banner -->
+
+	<!-- Start Product Area -->
+    <div class="product-area section">
+            <div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="section-title">
+							<h2>Trending Item</h2>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<div class="product-info">
+							<div class="tab-content" id="myTabContent">
+								<!-- Start Single Tab -->
+								<div class="tab-pane fade show active" id="man" role="tabpanel">
+									<div class="tab-single">
+										<div class="row">
+											<% for(var i = 0; i < product.length; i++){ %>
+											<% if(i == 7){ %>
+												<% break; %>
+											<% } %>
+											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+												<div class="single-product">
+													<div class="product-img">
+														<a href="/product/<%= product[i]._id %>">
+															<img class="default-img img-fluid image-product" src="<%= product[i].image %>" alt="#">
+														</a>
+														<div class="button-head">
+															<div class="product-action">
+																<a title="Quick View" href="/product/<%= product[i]._id %>"><i class=" ti-eye"></i><span>Check out</span></a>
+															</div>
+															<div class="product-action-2">
+																<a title="Add to cart" href="/product/cart/<%= product[i]._id %>">Add to cart</a>
+															</div>
+														</div>
+													</div>
+													<div class="product-content">
+														<h3><a href="/product/<%= product[i]._id %>"><%= product[i].title %></a></h3>
+														<div class="product-price">
+															<span class="old">₹500</span>
+															<% if(product[i].price.search("₹") != -1){ %>
+																<span><%= product[i].price %></span>
+															<% } else { %>
+																<span>₹<%= product[i].price %></span>
+															<% } %>
+														</div>
+													</div>
+												</div>
+											</div>
+											<% } %>
+										</div>
+									</div>
+								</div>
+								<!--/ End Single Tab -->
+							</div>
+						</div>
+					</div>
+				</div>
+            </div>
+    </div>
+	<!-- End Product Area -->
+
+	<!-- Start Most Popular -->
+	<div class="product-area most-popular section">
+        <div class="container">
+            <div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<h2>Hot Item</h2>
+					</div>
+				</div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel popular-slider">
+						<!-- Add four products minimum to make this work!!! -->
+						<% for(var i = 0; i < product.length; i++){ %>
+						<!-- Start Single Product -->
+						<div class="single-product">
+							<div class="product-img">
+								<a href="/product/<%= product[i]._id %>">
+									<img class="default-img img-fluid image-product" src="<%= product[i].image %>" alt="#">
+									<span class="out-of-stock">Hot</span>
+								</a>
+								<div class="button-head">
+									<div class="product-action">
+										<a title="Quick View" href="/product/<%= product[i]._id %>"><i class=" ti-eye"></i><span>Check out</span></a>
+									</div>
+									<div class="product-action-2">
+										<a title="Add to cart" href="/product/cart/<%= product[i]._id %>">Add to cart</a>
+									</div>
+								</div>
+							</div>
+							<div class="product-content">
+								<h3><a href="/product/<%= product[i]._id %>"><%= product[i].title %></a></h3>
+								<div class="product-price">
+									<span class="old">₹500</span>
+									<% if(product[i].price.search("₹") != -1){ %>
+										<span><%= product[i].price %></span>
+									<% } else { %>
+										<span>₹<%= product[i].price %></span>
+									<% } %>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Product -->
+						<% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- End Most Popular Area -->
+
+	<% if(product.length > 0){ %>
+		<% var num = 3 %>
+		<!-- Start Cowndown Area -->
+		<section class="cown-down">
+			<div class="section-inner ">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-6 col-12 padding-right">
+							<div class="image">
+								<img src="<%= product[num].image %>" alt="#">
+							</div>
+						</div>
+						<div class="col-lg-6 col-12 padding-left">
+							<div class="content">
+								<div class="heading-block">
+									<p class="small-title">Deal of day</p>
+									<h3 class="title"><%= product[num].title %></h3>
+									<p class="text"><%= product[num].desc %></p>
+									<h1 class="price">₹<%= product[num].price %> <s>₹500</s></h1>
+									<div class="coming-time">
+										<div class="clearfix" data-countdown="2021/02/30"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /End Cowndown Area -->
+
+		<br>
+		<br>
+	
+	<% } %>
+
+	<!-- Start Shop Services Area -->
+	<section class="shop-services section home">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="ti-rocket"></i>
+						<h4>Free shiping</h4>
+						<p>Orders over $100</p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="ti-reload"></i>
+						<h4>Free Return</h4>
+						<p>Within 30 days returns</p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="ti-lock"></i>
+						<h4>Secure Payment</h4>
+						<p>100% secure payment</p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+				<div class="col-lg-3 col-md-6 col-12">
+					<!-- Start Single Service -->
+					<div class="single-service">
+						<i class="ti-tag"></i>
+						<h4>Best Piece</h4>
+						<p>Guaranteed price</p>
+					</div>
+					<!-- End Single Service -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Services Area -->
+
+	<!-- Start Shop Newsletter  -->
+	<section class="shop-newsletter section">
+		<div class="container">
+			<div class="inner-top">
+				<div class="row">
+					<div class="col-lg-8 offset-lg-2 col-12">
+						<!-- Start Newsletter Inner -->
+						<div class="inner">
+							<h4>Newsletter</h4>
+							<p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+							<form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+								<input name="EMAIL" placeholder="Your email address" required="" type="email">
+								<button class="btn">Subscribe</button>
+							</form>
+						</div>
+						<!-- End Newsletter Inner -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Shop Newsletter -->
+
+	<!-- Start Footer Area -->
+	<footer class="footer">
+		<!-- Footer Top -->
+		<div class="footer-top section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-5 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer about">
+							<div class="logo">
+								<a href="index.html"><img src="/images/logo2.png" alt="#"></a>
+							</div>
+							<p class="text">Present dapibus, neque id cursus ucibus, tortor neque egestas augue,  magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+							<p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">+0123 456 789</a></span></p>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-2 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer links">
+							<h4>Information</h4>
+							<ul>
+								<li><a href="#">About Us</a></li>
+								<li><a href="#">Faq</a></li>
+								<li><a href="#">Terms & Conditions</a></li>
+								<li><a href="#">Contact Us</a></li>
+								<li><a href="#">Help</a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-2 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer links">
+							<h4>Customer Service</h4>
+							<ul>
+								<li><a href="#">Payment Methods</a></li>
+								<li><a href="#">Money-back</a></li>
+								<li><a href="#">Returns</a></li>
+								<li><a href="#">Shipping</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer social">
+							<h4>Get In Touch</h4>
+							<!-- Single Widget -->
+							<div class="contact">
+								<ul>
+									<li>NO. 342 - London Oxford Street.</li>
+									<li>012 United Kingdom.</li>
+									<li>info@eshop.com</li>
+									<li>+032 3456 7890</li>
+								</ul>
+							</div>
+							<!-- End Single Widget -->
+							<ul>
+								<li><a href="#"><i class="ti-facebook"></i></a></li>
+								<li><a href="#"><i class="ti-twitter"></i></a></li>
+								<li><a href="#"><i class="ti-flickr"></i></a></li>
+								<li><a href="#"><i class="ti-instagram"></i></a></li>
+							</ul>
+						</div>
+						<!-- End Single Widget -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Footer Top -->
+		<div class="copyright">
+			<div class="container">
+				<div class="inner">
+					<div class="row">
+						<div class="col-lg-6 col-12">
+							<div class="left">
+								<p>Copyright © 2020 <a href="http://www.wpthemesgrid.com" target="_blank">Wpthemesgrid</a>  -  All Rights Reserved.</p>
+							</div>
+						</div>
+						<div class="col-lg-6 col-12">
+							<div class="right">
+								<img src="/images/payments.png" alt="#">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- /End Footer Area -->
+
+	<!-- Jquery -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.0.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<!-- Popper JS -->
+	<script src="/js/popper.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="/js/bootstrap.min.js"></script>
+	<!-- Color JS -->
+	<script src="/js/colors.js"></script>
+	<!-- Slicknav JS -->
+	<script src="/js/slicknav.min.js"></script>
+	<!-- Owl Carousel JS -->
+	<script src="/js/owl-carousel.js"></script>
+	<!-- Magnific Popup JS -->
+	<script src="/js/magnific-popup.js"></script>
+	<!-- Waypoints JS -->
+	<script src="/js/waypoints.min.js"></script>
+	<!-- Countdown JS -->
+	<script src="/js/finalcountdown.min.js"></script>
+	<!-- Nice Select JS -->
+	<script src="/js/nicesellect.js"></script>
+	<!-- Flex Slider JS -->
+	<script src="/js/flex-slider.js"></script>
+	<!-- ScrollUp JS -->
+	<script src="/js/scrollup.js"></script>
+	<!-- Onepage Nav JS -->
+	<script src="/js/onepage-nav.min.js"></script>
+	<!-- Easing JS -->
+	<script src="/js/easing.js"></script>
+	<!-- Active JS -->
+	<script src="/js/active.js"></script>
+</body>
+</html>
